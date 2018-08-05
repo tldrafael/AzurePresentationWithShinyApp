@@ -1,0 +1,24 @@
+{
+        "id": "pool01",
+        "vmSize": "standard_a1",
+        "virtualMachineConfiguration": {
+                "imageReference": {
+                        "publisher": "microsoft-azure-batch",
+                        "offer": "ubuntu-server-container",
+                        "sku": "16-04-lts",
+                        "version": "latest"
+                },
+                "nodeAgentSKUId": "batch.node.ubuntu 16.04",
+                "containerConfiguration": {
+                        "type": "docker",
+                        "containerImageNames": [
+                                "tldrafael/job_docker_train"
+                                ]
+                }
+        },
+        "targetDedicatedNodes": 1,
+        "targetLowPriorityNodes": 0,
+        "enableAutoScale": false
+}
+
+

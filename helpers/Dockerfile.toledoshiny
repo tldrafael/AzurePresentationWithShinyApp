@@ -1,0 +1,27 @@
+FROM quantumobject/docker-shiny
+
+RUN apt-get update && \
+        apt-get install -y \
+                --no-install-recommends \ 
+                libxml2-dev \
+                libcurl4-openssl-dev \
+                libssl-dev && \
+        R -e 'install.packages("tidyverse", repos="https://cran-r.c3sl.ufpr.br/")' && \
+        R -e 'install.packages("xgboost", repos="https://cran-r.c3sl.ufpr.br/")' && \
+        R -e 'install.packages("tuneR", repos="https://cran-r.c3sl.ufpr.br/")'
+
+
+# -- install az-cli -----------------------------------------------------------------------------
+RUN apt-get update && \
+        apt-get install -y --no-install-recommends \
+                                curl \
+                                gnupg \
+                                apt-transport-https && \
+        echo "deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ $(lsb_release -cs) main" | \
+                tee /etc/apt/sources.list.d/azure-cli.list && \
+        curl -L https://packages.microsoft.com/keys/microsoft.asc | apt-key add - && \
+        apt-get update && \
+        apt-get install -y --no-install-recommends  azure-cli
+# ------------------------------------------------------------------------------------------------   
+
+RUN R -e 'install.packages("xgboost", repos="http://cran.us.r-project.org")'

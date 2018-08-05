@@ -1,0 +1,62 @@
+{
+        "id": "jobTemplate",
+        "poolInfo": {
+                "poolId": "pool01"
+        },
+        "constraints": {
+                "maxWallClockTime": "PT1H",
+                "maxTaskRetryCount": 100
+        },
+        "jobManagerTask": {
+                "id": "taskjob",
+                "commandLine": "Rscript /home/app.train/main.R",
+                "resourceFiles": [
+                        {
+                                "blobSource": "https://shinystorage.blob.core.windows.net/trainsongs/stones-rubyTuesday.wav",
+                                "filePath": "stones-rubyTuesday.wav"
+                        },
+                        {
+                                "blobSource": "https://shinystorage.blob.core.windows.net/trainsongs/beatles-andILoveHer.wav",
+                                "filePath": "beatles-andILoveHer.wav"
+                        }
+                        ],
+                "environmentSettings": [
+                        {
+                                "name": "STORAGE_KEY",
+                                "value": "STORAGE_KEY" },
+                        {
+                                "name": "STORAGE_NAME",
+                                "value": "STORAGE_NAME"
+                        },
+                        {
+                                "name": "CONTAINER_BLOBS_MODEL",
+                                "value": "CONTAINER_BLOBS_MODEL"
+                        },
+                        {
+                                "name": "AUDIO_DIR",
+                                "value": "AUDIO_DIR_TEMPLATE"
+                        },
+                        {
+                                "name": "MODELNAME",
+                                "value": "MODELNAME_TEMPLATE"
+                        }
+                        ],
+                "constraints": {
+                        "maxWallClockTime": "PT1H",
+                        "maxTaskRetryCount": 0,
+                        "retentionTime": "PT1H"
+                },
+                "killJobOnCompletion": false,
+                "userIdentity": {
+                        "autoUser": {
+                                "scope": "task",
+                                "elevationLevel": "admin"
+                        }
+                },
+                "runExclusive": true,
+                "containerSettings":{
+                        "imageName": "tldrafael/job_docker_train"
+                }
+
+        }
+}
