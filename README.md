@@ -1,6 +1,6 @@
 This repo contains the code used in the Khomp Talk about how to deploy Webapp and do workload using the Azure resources.
 
-The system scheme is presented in the figure bellow.
+The system scheme is presented in the figure bellow, the purpose of the system is create a model to distinguish the author song between beatles and stones.
 
 ![](helpers/application_flowchart.png)
 
